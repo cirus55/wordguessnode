@@ -1,9 +1,5 @@
 var Letter = require("./letter");
 
-var options = ["HOMER","MARGE","BART","LISA","LEELA","BENDER","WOLVERINE", "STORM"];
-var number = Math.floor(Math.random()*options.length);
-var tobeguessed = options[number];
-
 var Word = function(tobeguessed){
     this.arrayword = tobeguessed.split("");
     this.letters = [];
@@ -14,6 +10,7 @@ var Word = function(tobeguessed){
         }
     }
     this.process = function(){
+        this.display = [];
         var string = "";
         for (let i = 0; i < this.letters.length; i++) {
             var temp = this.letters[i].display();
@@ -25,6 +22,14 @@ var Word = function(tobeguessed){
         for (let i = 0; i < this.letters.length; i++) {
             this.letters[i].choice(letra);
         }
+    }
+    this.check = function(){
+        for (let i = 0; i < this.letters.length; i++) {
+            if (this.letters[i].guessed == false){
+                return false;
+            }
+        }
+        return true;
     }
 }
 
@@ -43,4 +48,9 @@ module.exports.Word = Word;
 // blah.process();
 // console.log(blah.letters);
 // console.log(blah.display);
+
+// var blah = new Word("WOLVERINE");
+// blah.create();
+// blah.process();
+// console.log(blah.check());
 
